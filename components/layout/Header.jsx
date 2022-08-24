@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { ListItem } from '@mantine/core';
 
 function Header() {
     const navLinks = [
