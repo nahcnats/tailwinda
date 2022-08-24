@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Store } from '../context/Store';
 import Layout from '../components/common/Layout';
 import Empty from '../components/common/Empty';
-import { XCircleIcon } from '@heroicons/react/24/outline';
+import { XCircleIcon, PlusIcon, MinusIcon } from '@heroicons/react/24/outline';
 
 
 function CartPage() {
@@ -17,6 +17,52 @@ function CartPage() {
 
     function removeItemHandler(item) {
         dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+    }
+
+    function QuantityToggler({ item }) {
+        const { countInStock, quantity } = item;
+        let newQuantity = quantity;
+
+        function decrementHandler() {
+            newQuantity = newQuantity - 1;
+
+            updateCartHandler(item, newQuantity);
+        }
+
+        function incrementHandler() {
+            newQuantity = newQuantity + 1;
+
+            updateCartHandler(item, newQuantity);
+        }
+
+        return (
+            <div className='flex justify-end'>
+                <div className='flex justify-between items-center'>
+                    <button
+                        className='bg-red-500 p-2 rounded'
+                        onClick={decrementHandler}
+                        disabled={quantity === 1 ? true : false}
+                    >
+                        <MinusIcon className='h-2 w-2' />
+                    </button>
+                    <span className='w-10 text-center'>{quantity}</span>
+                    <button
+                        className='bg-green-500 p-2 rounded'
+                        onClick={incrementHandler}
+                        disabled={countInStock === quantity ? true : false}
+                    >
+                        <PlusIcon className='h-2 w-2' />
+                    </button>
+                </div>
+            </div>
+            
+        );
+    }
+
+    function updateCartHandler(item, qty) {
+        const quantity = Number(qty);
+
+        dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
     }
 
     if (cartItems.length === 0) {
@@ -57,7 +103,9 @@ function CartPage() {
                                                 </a>
                                             </Link>
                                         </td>
-                                        <td className='text-right'>{item.quantity}</td>
+                                        <td>
+                                            <QuantityToggler item={item} />
+                                        </td>
                                         <td className='text-right'>RM {item.price}</td>
                                         <td className='p-5 text-center'>
                                             <button onClick={() => removeItemHandler(item)}>
