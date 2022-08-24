@@ -1,22 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-import Layout from '../../components/layout/Layout';
+import Layout from '../../components/common/Layout';
+import Empty from '../../components/common/Empty';
 import { Store } from '../../context/Store';
 import cn from '../../utils/cssClassIncludes';
 
 import data from '../../utils/data';
 
 function ProductPage() {
-    const { state, dispatch } = useContext(Store)
+    const router = useRouter();
+    const { state, dispatch } = useContext(Store);
     const { query } = useRouter();
     const { slug } = query;
     const product = data.products.find(x => x.slug === slug);
     const [isLoading, setIsLoading] = useState(true);
 
     if (!product) {
-        return <div>Product Not Found!</div>;
+        return (
+            <Empty message='Product Not Found!' actionMessage='back to products' />
+        );
     }
 
     function addToCartHandler() {
@@ -29,6 +33,7 @@ function ProductPage() {
         }
 
         dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
+        router.push('/cart');
     }
 
     return (

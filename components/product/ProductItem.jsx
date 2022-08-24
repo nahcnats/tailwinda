@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import cn from '../../utils/cssClassIncludes';
+import { Store } from '../../context/Store';
 
 function ProductItem({ product }) {
-    function BlurImage({ image, name, slug }) {
+    const { state, dispatch } = useContext(Store);
+
+    const BlurImage = useCallback(({ image, name, slug }) => {
         const [isLoading, setIsLoading] = useState(true);
 
         return (
@@ -28,6 +31,18 @@ function ProductItem({ product }) {
                 </a>
             </Link>
         );
+    }, [product]);
+
+    function addToCartHandler() {
+        const existItem = state.cart.cartItems.find((x) => x.slug === product.slug);
+        const quantity = existItem ? existItem.quantity + 1 : 1;
+
+        if (product.countInStock < quantity) {
+            alert('Sorry. Product is out of stock');
+            return;
+        }
+
+        dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
     }
 
     return (
@@ -42,7 +57,13 @@ function ProductItem({ product }) {
                 </Link>
                 <p className='mb-2'>{ product.brand }</p>
                 <p className='mb-2'>RM {product.price}</p>
-                <button className='primary-button' type='button'>Add to cart</button>
+                <button
+                    className='primary-button'
+                    type='button'
+                    onClick={() => addToCartHandler(product.slug)}
+                >
+                    Add to cart
+                </button>
             </div>
         </div>
     );
