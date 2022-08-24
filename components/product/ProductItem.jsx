@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-function cn(...classes) {
-    return classes.filter(Boolean).join(' ');
-}
+import cn from '../../utils/cssClassIncludes';
 
 function ProductItem({ product }) {
     function BlurImage({ image, name, slug }) {
