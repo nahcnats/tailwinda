@@ -1,8 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { Store } from "../../context/Store";
+import { useSession } from "next-auth/react";
+import "react-toastify/dist/ReactToastify.css";
 
 function Header() {
+    const { status, data: session } = useSession();
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
     const [cartItemCount, setCartItemCount] = useState(0);
@@ -34,9 +37,15 @@ function Header() {
                 </Link>
                 <div className="flex items-center">
                     <Cart />
-                    <Link href="/login" passHref>
-                        <a className="p-2">Login</a>
-                    </Link>
+                    {status === "loading" ? (
+                        "Loading"
+                    ) : session?.user ? (
+                        session.user.name
+                    ) : (
+                        <Link href="/login" passHref>
+                            <a className="p-2">Login</a>
+                        </Link>
+                    )}
                 </div>
             </nav>
         </header>

@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
+import { ToastContainer } from "react-toastify";
 
 function Layout({ title, children }) {
     const siteName = "Tailwinda";
@@ -13,6 +14,8 @@ function Layout({ title, children }) {
                 <meta name="description" content="Ecommerce Website" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+
+            <ToastContainer position="bottom-center" limit={1} />
 
             <div className="flex min-h-screen flex-col justify-between">
                 <Header />
