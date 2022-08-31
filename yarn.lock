@@ -1231,6 +1231,11 @@ isexe@^2.0.0:
   resolved "https://registry.npmmirror.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
 
+js-cookie@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
+  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
+
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmmirror.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
@@ -1626,6 +1631,11 @@ prettier-plugin-tailwindcss@^0.1.13:
   version "0.1.13"
   resolved "https://registry.npmmirror.com/prettier-plugin-tailwindcss/-/prettier-plugin-tailwindcss-0.1.13.tgz#ca1071361dc7e2ed5d95a2ee36825ce45f814942"
   integrity sha512-/EKQURUrxLu66CMUg4+1LwGdxnz8of7IDvrSLqEtDqhLH61SAlNNUSr90UTvZaemujgl3OH/VHg+fyGltrNixw==
+
+prettier@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.npmmirror.com/prettier/-/prettier-2.7.1.tgz#e235806850d057f97bb08368a4f7d899f7760c64"
+  integrity sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==
 
 prop-types@^15.8.1:
   version "15.8.1"

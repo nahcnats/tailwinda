@@ -44,7 +44,7 @@ function ProductPage() {
                 </Link>
             </div>
             <div className='grid md:grid-cols-4 md:gap-3'>
-                <div className='md:col-span-2'>
+                <div className='pb-5 md:col-span-2'>
                     <Image
                         src={product.image}
                         alt={product.name}
@@ -52,7 +52,7 @@ function ProductPage() {
                         height={640}
                         layout='responsive'
                         className={cn(
-                            'duration-700 ease-in-out group-hover:opacity-75',
+                            'duration-700 ease-in-out group-hover:opacity-75 rounded shadow',
                             isLoading
                                     ? 'scale-110 blur-2xl grayscale'
                                     : 'scale-100 blur-0 grayscale-0'
