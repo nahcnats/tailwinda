@@ -19,7 +19,7 @@ textarea {
 }
 
 a {
-    @apply text-primary hover:text-amber-600;
+    @apply text-primary hover:text-blue-800;
 }
 
 .card {
