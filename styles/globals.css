@@ -15,11 +15,11 @@ body {
 input,
 select,
 textarea {
-    @apply rounded border p-2 outline-none ring-indigo-300 focus:ring;
+    @apply ring-secondaryAccent rounded border p-2 outline-none focus:ring;
 }
 
 a {
-    @apply text-primary hover:text-blue-800;
+    @apply text-primary hover:text-primaryAccent;
 }
 
 .card {

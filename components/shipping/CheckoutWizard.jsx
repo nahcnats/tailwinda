@@ -15,9 +15,7 @@ function CheckoutWizard({ activeStep = 0 }) {
                 >
                     <div
                         className={`mb-2 w-8 ${
-                            index <= activeStep
-                                ? "bg-indigo-400"
-                                : "bg-gray-400"
+                            index <= activeStep ? "bg-secondary" : "bg-inActive"
                         } text-center text-white`}
                     >
                         {index + 1}
@@ -25,8 +23,8 @@ function CheckoutWizard({ activeStep = 0 }) {
                     <div
                         className={`w-full flex-1 border-b-2 text-center ${
                             index <= activeStep
-                                ? "border-indigo-400 text-indigo-400"
-                                : "border-gray-400 text-gray-400"
+                                ? "border-secondary text-secondary"
+                                : "border-inActive text-inActive"
                         }`}
                     >
                         {step}
