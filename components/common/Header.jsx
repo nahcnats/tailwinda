@@ -49,7 +49,7 @@ function Header() {
     }
 
     return (
-        <header>
+        <header className="z-10">
             <nav className="flex h-12 items-center justify-between px-4 shadow-md">
                 <Link href="/" passHref>
                     <a className="text-lg font-bold text-primary">tailwinda</a>
