@@ -37,7 +37,7 @@ function Carousel({ images }) {
     };
 
     return (
-        <div className="relative -ml-[97px] h-[300px] w-screen overflow-hidden bg-gray-200">
+        <div className="relative -ml-[7.7%] h-[300px] w-screen overflow-hidden bg-gray-200">
             <ArrowContainer
                 style={{ left: 0 }}
                 onClick={() => handleArrow("l")}
