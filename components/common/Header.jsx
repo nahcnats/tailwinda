@@ -4,6 +4,8 @@ import { Menu } from "@headlessui/react";
 import { Store } from "../../context/Store";
 import Cookies from "js-cookie";
 import { signOut, useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import DropdownLink from "./DropdownLink";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -12,10 +14,18 @@ function Header() {
     const { state, dispatch } = useContext(Store);
     const { cart } = state;
     const [cartItemCount, setCartItemCount] = useState(0);
+    const [mounted, setMounted] = useState(false);
+    const { theme, setTheme } = useTheme();
 
     useEffect(() => {
         setCartItemCount(cart.cartItems.reduce((a, c) => a + c.quantity, 0));
     }, [cart.cartItems]);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
 
     function Cart() {
         return (
@@ -45,6 +55,18 @@ function Header() {
                     <a className="text-lg font-bold text-primary">tailwinda</a>
                 </Link>
                 <div className="flex items-center">
+                    <button
+                        className="p-6"
+                        onClick={() =>
+                            setTheme(theme === "light" ? "dark" : "light")
+                        }
+                    >
+                        {theme === "light" ? (
+                            <MoonIcon className="h-5 w-5" />
+                        ) : (
+                            <SunIcon className="h-7 w-7" />
+                        )}
+                    </button>
                     <Cart />
                     {status === "loading" ? (
                         "Loading"
