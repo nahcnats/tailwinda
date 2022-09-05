@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import Layout from "../components/common/Layout";
@@ -17,7 +17,7 @@ function ShippingPage() {
         handleSubmit,
         formState: { errors },
         setValue,
-        getValues,
+        // getValues,
     } = useForm();
 
     useEffect(() => {
@@ -183,4 +183,3 @@ function ShippingPage() {
 }
 
 export default ShippingPage;
-ShippingPage.auth = true;

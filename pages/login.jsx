@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Layout from "../components/common/Layout";
+import FormFieldError from "../components/common/FormFieldError";
 import { getError } from "../utils/error";
 
 function LoginPage() {
@@ -63,9 +64,7 @@ function LoginPage() {
                         autoFocus
                     />
                     {errors.email && (
-                        <div className="text-red-500">
-                            {errors.email.message}
-                        </div>
+                        <FormFieldError errorMessage={errors.email.message} />
                     )}
                 </div>
                 <div className="mb-4">
@@ -84,9 +83,9 @@ function LoginPage() {
                         autoFocus
                     />
                     {errors.password && (
-                        <div className="text-red-500">
-                            {errors.password.message}
-                        </div>
+                        <FormFieldError
+                            errorMessage={errors.password.message}
+                        />
                     )}
                 </div>
                 <div className="mb-4">
