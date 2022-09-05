@@ -8,9 +8,13 @@ function Carousel({ images }) {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
-        setInterval(() => {
+        let intervalId = setInterval(() => {
             handleArrow("r");
         }, 3000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
     }, []);
 
     function handleArrow(direction) {
