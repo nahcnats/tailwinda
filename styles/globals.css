@@ -2,20 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+* {
     padding: 0;
     margin: 0;
-}
-
-* {
     box-sizing: border-box;
 }
 
 input,
 select,
 textarea {
-    @apply ring-secondaryAccent rounded border p-2 outline-none focus:ring;
+    @apply rounded border p-2 outline-none ring-secondaryAccent focus:ring;
 }
 
 a {
