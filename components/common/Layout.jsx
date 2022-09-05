@@ -20,16 +20,6 @@ function Layout({ title, children, carousel }) {
 
             <div className="flex min-h-screen flex-col justify-between">
                 <Header />
-                {carousel ? (
-                    <div className="hidden md:flex">
-                        <Carousel
-                            images={[
-                                "/images/banner1.jpg",
-                                "/images/banner2.jpg",
-                            ]}
-                        />
-                    </div>
-                ) : null}
                 <main className="container m-auto mt-4 px-4">{children}</main>
                 <Footer />
             </div>
