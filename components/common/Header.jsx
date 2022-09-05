@@ -55,18 +55,6 @@ function Header() {
                     <a className="text-lg font-bold text-primary">tailwinda</a>
                 </Link>
                 <div className="flex items-center">
-                    <button
-                        className="p-6"
-                        onClick={() =>
-                            setTheme(theme === "light" ? "dark" : "light")
-                        }
-                    >
-                        {theme === "light" ? (
-                            <MoonIcon className="h-5 w-5" />
-                        ) : (
-                            <SunIcon className="h-7 w-7" />
-                        )}
-                    </button>
                     <Cart />
                     {status === "loading" ? (
                         "Loading"
@@ -112,6 +100,18 @@ function Header() {
                             <a className="p-2 font-semibold">Login</a>
                         </Link>
                     )}
+                    <button
+                        className="p-6"
+                        onClick={() =>
+                            setTheme(theme === "light" ? "dark" : "light")
+                        }
+                    >
+                        {theme === "light" ? (
+                            <MoonIcon className="h-5 w-5" />
+                        ) : (
+                            <SunIcon className="h-7 w-7" />
+                        )}
+                    </button>
                 </div>
             </nav>
         </header>

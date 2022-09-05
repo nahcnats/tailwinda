@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
+import ReactStars from "react-stars";
 import Layout from "../../components/common/Layout";
 import Empty from "../../components/common/Empty";
 import { Store } from "../../context/Store";
@@ -78,7 +79,19 @@ function ProductPage({ product }) {
                         <li>Category: {product.category}</li>
                         <li>Brand: {product.brand}</li>
                         <li>
-                            {product.rating} of {product.numReviews} reviews
+                            <div className="flex flex-row items-center gap-2">
+                                <ReactStars
+                                    count={5}
+                                    value={product.rating}
+                                    size={20}
+                                    color2={"#ffd700"}
+                                    half
+                                    edit={false}
+                                />
+                                <span>of {product.numReviews} reviews</span>
+                            </div>
+
+                            {/* {product.rating} of {product.numReviews} reviews */}
                         </li>
                         <li>Description: {product.description}</li>
                     </ul>
