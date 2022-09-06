@@ -1,14 +1,9 @@
 import React from "react";
 
-function CheckoutWizard({ activeStep = 0 }) {
+function Wizard({ steps, activeStep = 0 }) {
     return (
         <div className="mb-5 flex">
-            {[
-                "User Login",
-                "Shipping Address",
-                "Payment Method",
-                "Place Order",
-            ].map((step, index) => (
+            {steps.map((step, index) => (
                 <div
                     key={index}
                     className="flex flex-1 flex-col items-center justify-end"
@@ -35,4 +30,4 @@ function CheckoutWizard({ activeStep = 0 }) {
     );
 }
 
-export default CheckoutWizard;
+export default Wizard;

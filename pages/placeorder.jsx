@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Layout from "../components/common/Layout";
-import CheckoutWizard from "../components/shipping/CheckoutWizard";
+import Wizard from "../components/common/Wizard";
 import Empty from "../components/common/Empty";
 import { Store } from "../context/Store";
 import { getError } from "../utils/error";
+import { checkoutSteps } from "../utils/constants";
 
 function PlaceOrderPage() {
     const { state, dispatch } = useContext(Store);
@@ -65,7 +66,7 @@ function PlaceOrderPage() {
 
     return (
         <Layout title="Place Order">
-            <CheckoutWizard activeStep={3} />
+            <Wizard steps={checkoutSteps} activeStep={3} />
             <h1 className="mb-4 text-xl">Place Order</h1>
             <div className="grid md:grid-cols-4 md:gap-5">
                 <div className="overflow-x-auto md:col-span-3">

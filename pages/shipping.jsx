@@ -3,9 +3,10 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import Cookies from "js-cookie";
 import Layout from "../components/common/Layout";
-import CheckoutWizard from "../components/shipping/CheckoutWizard";
+import Wizard from "../components/common/Wizard";
 import FormFieldError from "../components/common/FormFieldError";
 import { Store } from "../context/Store";
+import { checkoutSteps } from "../utils/constants";
 
 function ShippingPage() {
     const { state, dispatch } = useContext(Store);
@@ -69,7 +70,7 @@ function ShippingPage() {
 
     return (
         <Layout title="Shipping Address">
-            <CheckoutWizard activeStep={1} />
+            <Wizard steps={checkoutSteps} activeStep={1} />
             <form
                 className="mx-auto max-w-screen-md"
                 onSubmit={handleSubmit(submitHandler)}

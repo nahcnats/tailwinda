@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Layout from "../components/common/Layout";
-import CheckoutWizard from "../components/shipping/CheckoutWizard";
+import Wizard from "../components/common/Wizard";
 import { Store } from "../context/Store";
+import { checkoutSteps } from "../utils/constants";
 
 function PaymentPage() {
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
@@ -46,7 +47,7 @@ function PaymentPage() {
 
     return (
         <Layout title="Payment Method">
-            <CheckoutWizard activeStep={2} />
+            <Wizard steps={checkoutSteps} activeStep={2} />
             <form className="mx-auto max-w-screen-md" onSubmit={submitHandler}>
                 <h1 className="mb-4 text-xl">Payment Method</h1>
                 {["PayPal", "Stripe", "CashOnDelivery"].map(

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Layout from "../../components/common/Layout";
 import Empty from "../../components/common/Empty";
+import Loading from "../../components/common/Loading";
 import Error from "../../components/common/Error";
 
 import { getError } from "../../utils/error";
@@ -61,11 +62,19 @@ function OrderPage() {
     }, [order, orderId]);
 
     if (loading) {
-        return <Empty message="Loading..." />;
+        return (
+            <Layout title="Loading">
+                <Loading isVisible={loading} />
+            </Layout>
+        );
     }
 
     if (error !== "") {
-        return <Error message={error} />;
+        return (
+            <Layout title="Error">
+                <Error message={error} />
+            </Layout>
+        );
     }
 
     const {
