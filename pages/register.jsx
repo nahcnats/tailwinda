@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Layout from "../components/common/Layout";
 import FormFieldError from "../components/common/FormFieldError";
 import { getError } from "../utils/error";
 
-function LoginPage() {
+function RegisterPage() {
     const { data: session } = useSession();
     const router = useRouter();
     const { redirect } = router.query;
@@ -22,11 +23,18 @@ function LoginPage() {
     const {
         register,
         handleSubmit,
+        getValues,
         formState: { errors },
     } = useForm();
 
-    async function submitHandler({ email, password }) {
+    async function submitHandler({ name, email, password }) {
         try {
+            await axios.post("/api/auth/signup", {
+                name,
+                email,
+                password,
+            });
+
             const result = await signIn("credentials", {
                 redirect: false,
                 email,
@@ -36,18 +44,33 @@ function LoginPage() {
             if (result.error) {
                 toast.error(result.error);
             }
-        } catch (err) {
-            toast.error(getError(err));
+        } catch (e) {
+            toast.error(getError(e));
         }
     }
 
     return (
-        <Layout title="Login">
+        <Layout title="Register">
             <form
                 className="mx-auto max-w-screen-md"
                 onSubmit={handleSubmit(submitHandler)}
             >
-                <h1 className="mb-4 text-xl">Login</h1>
+                <h1 className="mb-4 text-xl">Create Account</h1>
+                <div className="mb-4">
+                    <label htmlFor="name">Name</label>
+                    <input
+                        {...register("name", {
+                            required: "Please enter name",
+                        })}
+                        type="text"
+                        className="w-full"
+                        id="name"
+                        autoFocus
+                    />
+                    {errors.name && (
+                        <FormFieldError errorMessage={errors.email.message} />
+                    )}
+                </div>
                 <div className="mb-4">
                     <label htmlFor="email">Email</label>
                     <input
@@ -61,7 +84,6 @@ function LoginPage() {
                         type="email"
                         className="w-full"
                         id="email"
-                        autoFocus
                     />
                     {errors.email && (
                         <FormFieldError errorMessage={errors.email.message} />
@@ -88,15 +110,43 @@ function LoginPage() {
                     )}
                 </div>
                 <div className="mb-4">
-                    <button className="primary-button">Login</button>
+                    <label htmlFor="password">Confirm Password</label>
+                    <input
+                        {...register("confirmPassword", {
+                            required: "Please confirm your password",
+                            validate: (value) =>
+                                value === getValues("password"),
+                            minLength: {
+                                value: 6,
+                                message: "password is more than 5 chars",
+                            },
+                        })}
+                        type="password"
+                        className="w-full"
+                        id="confirmPassword"
+                    />
+                    {errors.confirmPassword && (
+                        <FormFieldError
+                            errorMessage={errors.confirmPassword.message}
+                        />
+                    )}
+                    {errors.confirmPassword &&
+                        errors.confirmPassword.type === "validate" && (
+                            <div className="text-red-500">
+                                Password do not match
+                            </div>
+                        )}
                 </div>
                 <div className="mb-4">
-                    Don&apos;t have an account? &nbsp;{" "}
+                    <button className="primary-button">Register</button>
+                </div>
+                <div className="mb-4">
+                    Already have an account? &nbsp;{" "}
                     <Link
-                        href={`/register?redirect=${redirect || "/"} `}
+                        href={`/login?redirect=${redirect || "/login"}`}
                         passHref
                     >
-                        <a>Register</a>
+                        <a>Login</a>
                     </Link>
                 </div>
             </form>
@@ -104,4 +154,4 @@ function LoginPage() {
     );
 }
 
-export default LoginPage;
+export default RegisterPage;
