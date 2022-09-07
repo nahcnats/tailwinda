@@ -7,12 +7,10 @@ import { Store } from "../../context/Store";
 
 function ProductItem({ product }) {
     const { state, dispatch } = useContext(Store);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const BlurImage = useCallback(
         ({ image, name, slug }) => {
-            setIsLoading(true);
-
             return (
                 <Link href={`/product/${slug}`} passHref>
                     <a>
@@ -35,7 +33,7 @@ function ProductItem({ product }) {
                 </Link>
             );
         },
-        [product]
+        [isLoading]
     );
 
     function addToCartHandler() {
