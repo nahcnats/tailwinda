@@ -19,7 +19,7 @@ function PaymentStatusPage() {
         return () => {
             clearTimeout(timeOutId);
         };
-    }, [jsConfetti, query]);
+    }, [jsConfetti, router]);
 
     return (
         <Layout title="Payment Status">

@@ -15,7 +15,7 @@ function Carousel({ images }) {
         return () => {
             clearInterval(intervalId);
         };
-    }, []);
+    }, [handleArrow]);
 
     function handleArrow(direction) {
         if (direction === "l") {

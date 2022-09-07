@@ -8,7 +8,8 @@ import Layout from "../../components/common/Layout";
 import Empty from "../../components/common/Empty";
 import { Store } from "../../context/Store";
 import cn from "../../utils/cssClassIncludes";
-import db from "../../utils/db";
+import dbConnect from "../../utils/db";
+import { convertDocToObj } from "../../utils/db";
 
 // import data from "../../utils/data";
 import Product from "../../models/Product";
@@ -127,13 +128,12 @@ export async function getServerSideProps(context) {
     const { params } = context;
     const { slug } = params;
 
-    await db.connect();
+    await dbConnect();
     const product = await Product.findOne({ slug }).lean();
-    await db.disconnect();
 
     return {
         props: {
-            product: product ? db.convertDocToObj(product) : null,
+            product: product ? convertDocToObj(product) : null,
         },
     };
 }

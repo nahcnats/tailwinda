@@ -1,10 +1,9 @@
 import Product from "../../../models/Product";
-import db from "../../../utils/db";
+import dbConnect from "../../../utils/db";
 
 async function handler(req, res) {
-    await db.connect();
+    await dbConnect();
     const product = await Product.findById(req.query.id);
-    await db.disconnect();
     res.send(product);
 }
 
