@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import { Store } from "../context/Store";
 import Layout from "../components/common/Layout";
 import Empty from "../components/common/Empty";
@@ -155,6 +154,4 @@ function CartPage() {
     );
 }
 
-export default dynamic(() => Promise.resolve(CartPage), {
-    ssr: false,
-});
+export default CartPage;

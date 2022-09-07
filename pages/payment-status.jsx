@@ -9,18 +9,17 @@ function PaymentStatusPage() {
     const jsConfetti = new JSConfetti();
 
     useEffect(() => {
+        if (query.success) {
+            jsConfetti.addConfetti();
+        }
         let timeOutId = setTimeout(() => {
-            if (query.success) {
-                jsConfetti.addConfetti();
-            }
-
             router.push("/");
-        }, 3000);
+        }, 4000);
 
         return () => {
             clearTimeout(timeOutId);
         };
-    }, [router]);
+    }, [jsConfetti, query]);
 
     return (
         <Layout title="Payment Status">
