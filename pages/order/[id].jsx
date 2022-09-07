@@ -6,8 +6,8 @@ import axios from "axios";
 import Layout from "../../components/common/Layout";
 import Loader from "../../components/common/Loader";
 import Error from "../../components/common/Error";
-
 import { getError } from "../../utils/error";
+import getStripe from "../../utils/getStripe";
 
 function reducer(state, action) {
     switch (action.type) {
@@ -35,8 +35,9 @@ function reducer(state, action) {
 }
 
 function OrderPage() {
-    const { query } = useRouter();
-    const { id: orderId } = query;
+    const router = useRouter();
+    const { query } = router;
+    const { id: orderId, success, canceled } = query;
 
     const [{ loading, error, order }, dispatch] = useReducer(reducer, {
         loading: true,
@@ -60,6 +61,18 @@ function OrderPage() {
         }
     }, [order, orderId]);
 
+    // useEffect(() => {
+    //     if (success !== undefined || canceled !== undefined) {
+    //         if (success) {
+    //             console.log("Order placed");
+    //         }
+
+    //         if (canceled) {
+    //             console.log("Order canceled ");
+    //         }
+    //     }
+    // }, [success, canceled]);
+
     if (loading) {
         return <Loader isVisible={loading} />;
     }
@@ -81,6 +94,29 @@ function OrderPage() {
         isDelivered,
         deliveredAt,
     } = order;
+
+    async function payNowHandler() {
+        const stripe = await getStripe();
+
+        const response = await axios({
+            method: "POST",
+            url: "/api/stripe",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: JSON.stringify(order),
+        });
+
+        if (response.statusCode === 500) {
+            return;
+        }
+
+        const data = await response.data;
+
+        stripe.redirectToCheckout({
+            sessionId: data.id,
+        });
+    }
 
     return (
         <Layout title={`Order ${orderId}`}>
@@ -189,6 +225,21 @@ function OrderPage() {
                                     <div>RM {totalPrice}</div>
                                 </div>
                             </li>
+                            {!isPaid && paymentMethod === "Stripe" && (
+                                <li>
+                                    {/* <form onSubmit={payNowHandler}> */}
+                                    <button
+                                        type="submit"
+                                        role="link"
+                                        disabled={isPaid}
+                                        className="primary-button w-full"
+                                        onClick={payNowHandler}
+                                    >
+                                        Pay NOW
+                                    </button>
+                                    {/* </form> */}
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>

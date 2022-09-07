@@ -5,7 +5,6 @@ import ProductItem from "../components/product/ProductItem";
 import db from "../utils/db";
 import Product from "../models/Product";
 import Carousel from "../components/common/Carousel";
-import Loading from "../components/common/Loading";
 
 function HomePage({ products }) {
     // const products = data.products;

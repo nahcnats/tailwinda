@@ -32,9 +32,9 @@ function Loader({ isVisible }) {
                 <div className="relative flex flex-1 flex-col items-center justify-center">
                     <div
                         ref={loadingRef}
-                        class="flex flex-col items-center justify-center "
+                        className="flex flex-col items-center justify-center "
                     >
-                        <div class="h-16 w-16 animate-spin rounded-full border-b-2 border-gray-200"></div>
+                        <div className="h-16 w-16 animate-spin rounded-full border-b-2 border-gray-200"></div>
                         <div className="mt-4 text-lg text-gray-100">
                             Loading...
                         </div>
