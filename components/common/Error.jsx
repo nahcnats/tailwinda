@@ -8,7 +8,7 @@ function Error({ message }) {
 
     return (
         <Layout>
-            <div className="flex h-screen flex-col items-center justify-center">
+            <div className="flex h-[85vh] flex-col items-center justify-center">
                 <div className="mb-4 rounded-lg bg-red-100 p-3 text-red-700">
                     {message}
                 </div>

@@ -32,5 +32,6 @@ export const config = {
         "/placeorder/:path*",
         "/payment/:path*",
         "/order/:path*",
+        "/payment-status/:path*",
     ],
 };

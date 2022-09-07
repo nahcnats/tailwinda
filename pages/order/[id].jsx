@@ -37,7 +37,7 @@ function reducer(state, action) {
 function OrderPage() {
     const router = useRouter();
     const { query } = router;
-    const { id: orderId, success, canceled } = query;
+    const { id: orderId } = query;
 
     const [{ loading, error, order }, dispatch] = useReducer(reducer, {
         loading: true,
@@ -60,18 +60,6 @@ function OrderPage() {
             fetchOrder();
         }
     }, [order, orderId]);
-
-    // useEffect(() => {
-    //     if (success !== undefined || canceled !== undefined) {
-    //         if (success) {
-    //             console.log("Order placed");
-    //         }
-
-    //         if (canceled) {
-    //             console.log("Order canceled ");
-    //         }
-    //     }
-    // }, [success, canceled]);
 
     if (loading) {
         return <Loader isVisible={loading} />;
