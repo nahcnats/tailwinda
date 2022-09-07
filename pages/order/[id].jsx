@@ -4,8 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Layout from "../../components/common/Layout";
-import Empty from "../../components/common/Empty";
-import Loading from "../../components/common/Loading";
+import Loader from "../../components/common/Loader";
 import Error from "../../components/common/Error";
 
 import { getError } from "../../utils/error";
@@ -62,19 +61,11 @@ function OrderPage() {
     }, [order, orderId]);
 
     if (loading) {
-        return (
-            <Layout title="Loading">
-                <Loading isVisible={loading} />
-            </Layout>
-        );
+        return <Loader isVisible={loading} />;
     }
 
     if (error !== "") {
-        return (
-            <Layout title="Error">
-                <Error message={error} />
-            </Layout>
-        );
+        return <Error message={error} />;
     }
 
     const {
