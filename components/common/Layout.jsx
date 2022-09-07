@@ -2,10 +2,9 @@ import React from "react";
 import Head from "next/head";
 import Header from "./Header";
 import Footer from "./Footer";
-import Carousel from "./Carousel";
 import { ToastContainer } from "react-toastify";
 
-function Layout({ title, children, carousel }) {
+function Layout({ title, children }) {
     const siteName = "Tailwinda";
 
     return (

@@ -20,7 +20,7 @@ function PaymentStatusPage() {
         return () => {
             clearTimeout(timeOutId);
         };
-    }, [query]);
+    }, [router]);
 
     return (
         <Layout title="Payment Status">

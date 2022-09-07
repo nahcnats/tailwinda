@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../components/common/Layout";
 import ProductItem from "../components/product/ProductItem";
 // import data from "../utils/data";
@@ -28,7 +28,7 @@ function HomePage({ products }) {
     );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
     await db.connect();
 
     const products = await Product.find().lean();

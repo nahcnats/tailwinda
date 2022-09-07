@@ -7,10 +7,11 @@ import { Store } from "../../context/Store";
 
 function ProductItem({ product }) {
     const { state, dispatch } = useContext(Store);
+    const [isLoading, setIsLoading] = useState(false);
 
     const BlurImage = useCallback(
         ({ image, name, slug }) => {
-            const [isLoading, setIsLoading] = useState(true);
+            setIsLoading(true);
 
             return (
                 <Link href={`/product/${slug}`} passHref>
