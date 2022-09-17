@@ -68,7 +68,7 @@ function RegisterPage() {
                         autoFocus
                     />
                     {errors.name && (
-                        <FormFieldError errorMessage={errors.email.message} />
+                        <FormFieldError errorMessage={errors.name.message} />
                     )}
                 </div>
                 <div className="mb-4">
